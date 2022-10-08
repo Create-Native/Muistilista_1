@@ -14,6 +14,7 @@ export default StyleSheet.create({
         marginTop: 40,
       },
       buttonLogIn: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 12,

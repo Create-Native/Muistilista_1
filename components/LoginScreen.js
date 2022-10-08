@@ -1,19 +1,19 @@
-import { View, Text, SafeAreaView, Button, Pressable } from 'react-native'
+import { View, Text, SafeAreaView, Button } from 'react-native'
 import React from 'react'
 import Styles from './Styles';
 
-export default function LoginScreen() {
+export default function LoginScreen({navigation}) {
   return (
    
     <SafeAreaView style={Styles.container}>
       <View>
         <Text style={Styles.heading}> LoginScreen1</Text>
-      {/*   <Button style={Styles.buttonLogIn} title="Submit" /> */}
-        <Pressable style={Styles.buttonLogIn}>
-          <Text style={Styles.buttonText}> Submit</Text>
-        </Pressable>
+        <Button style={Styles.buttonLogIn} 
+          title="Submit" 
+          onPress={() => navigation.navigate('Home')}
+          />
       </View>
-  </SafeAreaView>
+    </SafeAreaView>
 
   );
 }
