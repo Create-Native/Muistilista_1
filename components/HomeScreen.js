@@ -8,12 +8,12 @@ import Row from './Row';
 
 export default function HomeScreen({route, navigation }) {
 
-    const [notes, setNotes] = useState([])
+    /* const [notes, setNotes] = useState([]) */
     const [selectedId, setSelectedId] = useState(null);
 
-/*     const [notes, setNotes] = useState(
+      const [notes, setNotes] = useState(
       Array(5).fill('').map((_,i)=> (`Test`))
-  ); */
+  );
 
         useEffect(() => {
         setNotes(DATA);
@@ -35,7 +35,7 @@ export default function HomeScreen({route, navigation }) {
     <SafeAreaView style={Styles.container}>
       <View>
         <Text style={Styles.heading}> HomeScreen</Text>
-{/*         <ScrollView>
+                <ScrollView>
                 {
                     notes.map((note,index) => (
                         <View key={index} style={Styles.rowContainer}>
@@ -43,15 +43,15 @@ export default function HomeScreen({route, navigation }) {
                         </View>
                     ))
                 }
-            </ScrollView> */}
-         <FlatList
+            </ScrollView>
+{/*          <FlatList
           data={notes}
           keyExtractor={(item) => item.id}
           extraData={selectedId}
           renderItem= {({item}) => (         //tässäkin voi määritellä funktion ilman erillistä alihojelmaa
           <Row notes={item}selectedId={selectedId} select={select} />         
           )}
-      ></FlatList>
+      ></FlatList> */}
               <Button style={Styles.buttonLogIn} 
             title="Edit" 
             onPress={() => navigation.navigate('Edit')}
