@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './components/LoginScreen';
 import HomeScreen from './components/HomeScreen';
+import EditScreen from './components/EditScreen';
 
 
 export default function App() {
@@ -26,6 +27,11 @@ export default function App() {
           name="Home" 
           component={HomeScreen}
           options={{title: 'HomeScreen'}} 
+          />
+        <Stack.Screen 
+          name="Edit" 
+          component={EditScreen}
+          options={{title: 'EditScreen'}} 
           />
       </Stack.Navigator>
     </NavigationContainer>
