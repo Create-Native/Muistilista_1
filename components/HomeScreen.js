@@ -87,6 +87,10 @@ const getData = async() => {
             title="LogOut" 
             onPress={() => navigation.navigate('Login')}
             />
+        <Button style={Styles.buttonLogIn} 
+            title="ClearAll" 
+            onPress={() => AsyncStorage.clear()}   
+            />
       </View>
     </SafeAreaView>
 
