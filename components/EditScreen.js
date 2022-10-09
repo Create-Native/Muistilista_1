@@ -3,6 +3,7 @@ import React, { useState, useLayoutEffect } from "react";
 import { Feather } from '@expo/vector-icons';
 import { Button, TextInput, View } from "react-native";
 import Styles from "./Styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function EditScreen({navigation}) {
 
@@ -24,6 +25,11 @@ export default function EditScreen({navigation}) {
             ),
       })
       }), [note]; */
+
+    const clearAll = () => {
+        AsyncStorage.clear()
+        navigation.navigate('Login')
+    }
  
     return (
         <View>
@@ -36,6 +42,14 @@ export default function EditScreen({navigation}) {
                 title="Save" 
                 onPress={() => navigation.navigate('Home', {note: note})}
                 />
+            <Button style={Styles.buttonLogIn} 
+                title="ClearAll" 
+                onPress={() => clearAll()} 
+                />
+            <Button style={Styles.buttonLogIn} 
+                title="Back" 
+                onPress={() => navigation.navigate('Home')}
+            />          
         </View>
     )
 }

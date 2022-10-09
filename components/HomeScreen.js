@@ -29,29 +29,18 @@ export default function HomeScreen({route, navigation }) {
         ),  
     }) 
 }, [])  */
-
-useEffect(() => {
-  if(route.params?.note) {
-      const newKey = notes.lenght + 1;
-      const newNote = {key: newKey.toString(),descpriction: route.params.note};
-      const newNotes = [...notes, newNote];
-      storeData(newNotes);
-  }
-  getData();
-},[route.params?.note])
-
 const storeData = async (value) => {
   try{
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem(STORAGE_KEY,jsonValue);
+      await AsyncStorage.setItem('@notes_Key', jsonValue);
   } catch (e) {
-      console.log(e);
+    //  console.log(e);
   }
 }
 
 const getData = async() => {
   try{
-      return AsyncStorage.getItem(STORAGE_KEY)
+      return AsyncStorage.getItem('@notes_Key')
       .then (req => JSON.parse(req))
       .then (json => {
           if (json === null) {
@@ -61,9 +50,20 @@ const getData = async() => {
       })
       .catch (error => console.log(error));
   } catch (e) {
-      console.log(e);
-  }
+  //   console.log(e);
+  } 
 }
+
+useEffect(() => {
+  if(route.params?.note) {
+      const newKey = notes.length + 1;
+      const newNote = {key: newKey.toString(), note: route.params.note};
+      const newNotes = [...notes, newNote];
+      storeData(newNotes);
+  }
+  getData();
+},[route.params?.note])
+    
   return (
    
     <SafeAreaView style={Styles.container}>
@@ -73,7 +73,7 @@ const getData = async() => {
             {
               notes.map((note) => (
                 <View tyle={Styles.rowContainer} key={note.key}>
-                  <Text style={Styles.rowText}>{note.descpriction}</Text>
+                  <Text style={Styles.rowText}>{note.note}</Text>
                 </View>
               ))
             }
