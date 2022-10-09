@@ -1,37 +1,87 @@
 
-import { View, Text, SafeAreaView, Button, FlatList } from 'react-native'
-import { useEffect, useState } from 'react';
+import { View, Text, SafeAreaView, Button, ScrollView } from 'react-native'
+import { useEffect, useState, useLayoutEffect } from 'react';
+import { Feather } from '@expo/vector-icons';
 import React from 'react'
 import Styles from './Styles';
-import {DATA} from './Data';
-import Row from './Row';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function HomeScreen({navigation }) {
 
-    const [notes, setNotes] = useState([])
-    const [selectedId, setSelectedId] = useState(null);
+const STORAGE_KEY = '@notes_Key'
 
-    useEffect(() => {
-        setNotes(DATA);
-      }, [])
-    
-      const select =(id) => {
-        setSelectedId(id);
-      }
+export default function HomeScreen({route, navigation }) {
 
+    const [notes, setNotes] = useState([]);
+
+/*     useLayoutEffect( () => {
+    navigation.setOptions({
+        headerStyle: {
+            backroundColor: '#f0f0f0'
+        },
+        headerRight: () => (
+            <Feather
+                style={Styles.navButton}
+                name="plus"
+                size={24}
+                color="black"
+                onPress={ () => navigation.navigate('Edit')}
+            />  
+        ),  
+    }) 
+}, [])  */
+
+useEffect(() => {
+  if(route.params?.note) {
+      const newKey = notes.lenght + 1;
+      const newNote = {key: newKey.toString(),descpriction: route.params.note};
+      const newNotes = [...notes, newNote];
+      storeData(newNotes);
+  }
+  getData();
+},[route.params?.note])
+
+const storeData = async (value) => {
+  try{
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem(STORAGE_KEY,jsonValue);
+  } catch (e) {
+      console.log(e);
+  }
+}
+
+const getData = async() => {
+  try{
+      return AsyncStorage.getItem(STORAGE_KEY)
+      .then (req => JSON.parse(req))
+      .then (json => {
+          if (json === null) {
+              json = []
+          }
+          setNotes(json);
+      })
+      .catch (error => console.log(error));
+  } catch (e) {
+      console.log(e);
+  }
+}
   return (
    
     <SafeAreaView style={Styles.container}>
       <View>
         <Text style={Styles.heading}> HomeScreen</Text>
-        <FlatList
-          data={notes}
-          keyExtractor={(item) => item.id}
-          extraData={selectedId}
-          renderItem= {({item}) => (         //tässäkin voi määritellä funktion ilman erillistä alihojelmaa
-          <Row notes={item}selectedId={selectedId} select={select}/>
-          )}
-      ></FlatList>
+          <ScrollView>
+            {
+              notes.map((note) => (
+                <View tyle={Styles.rowContainer} key={note.key}>
+                  <Text style={Styles.rowText}>{note.descpriction}</Text>
+                </View>
+              ))
+            }
+            </ScrollView>
+        <Button style={Styles.buttonLogIn} 
+            title="Edit" 
+            onPress={() => navigation.navigate('Edit')}
+            />
         <Button style={Styles.buttonLogIn} 
             title="LogOut" 
             onPress={() => navigation.navigate('Login')}
