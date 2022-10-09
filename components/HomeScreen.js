@@ -56,16 +56,13 @@ const getData = async() => {
 
 useEffect(() => {
   if(route.params?.note) {
-      const newKey = notes.lenght + 1;
+      const newKey = notes.length + 1;
       const newNote = {key: newKey.toString(), note: route.params.note};
       const newNotes = [...notes, newNote];
       storeData(newNotes);
   }
   getData();
 },[route.params?.note])
-
- //   console.log(notes.length)
-  //  console.log(notes)
     
   return (
    
@@ -88,10 +85,6 @@ useEffect(() => {
         <Button style={Styles.buttonLogIn} 
             title="LogOut" 
             onPress={() => navigation.navigate('Login')}
-            />
-        <Button style={Styles.buttonLogIn} 
-            title="ClearAll" 
-            onPress={() => AsyncStorage.clear()}   
             />
       </View>
     </SafeAreaView>
