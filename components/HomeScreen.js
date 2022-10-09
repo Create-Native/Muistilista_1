@@ -1,11 +1,9 @@
 
-import { View, Text, SafeAreaView, Button, FlatList, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, Button, ScrollView } from 'react-native'
 import { useEffect, useState, useLayoutEffect } from 'react';
 import { Feather } from '@expo/vector-icons';
 import React from 'react'
 import Styles from './Styles';
-import {DATA} from './Data';
-import Row from './Row';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -13,8 +11,6 @@ const STORAGE_KEY = '@notes_Key'
 
 export default function HomeScreen({route, navigation }) {
 
-    /* const [notes, setNotes] = useState([]) */
-    const [selectedId, setSelectedId] = useState(null);
     const [notes, setNotes] = useState([]);
 
 /*     useLayoutEffect( () => {
@@ -68,9 +64,6 @@ const getData = async() => {
       console.log(e);
   }
 }
-
-
-
   return (
    
     <SafeAreaView style={Styles.container}>
