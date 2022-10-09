@@ -8,7 +8,7 @@ export default function EditScreen({navigation}) {
 
     const [note, setNote] = useState('');
 
-    useLayoutEffect(() => {
+/*     useLayoutEffect(() => {
       navigation.setOptions({
         headerStyle: {
             backgroundColor: '#f0f0f0'
@@ -23,8 +23,8 @@ export default function EditScreen({navigation}) {
                 />
             ),
       })
-      }), [note];
-    
+      }), [note]; */
+ 
     return (
         <View>
             <TextInput 

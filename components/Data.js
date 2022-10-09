@@ -4,11 +4,11 @@ export const DATA = [
         note: 'suolaa',
     },
     {
-        id: '1',
+        id: '',
         note: 'pottuja',
     },
     {
-        id: '1',
+        id: '3',
         note: 'makkaraa',
     },
   ]
