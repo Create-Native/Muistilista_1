@@ -10,9 +10,7 @@ import EditScreen from './components/EditScreen';
 
 export default function App() {
 
-
   const Stack = createNativeStackNavigator();
-
 
   return (
 

@@ -33,7 +33,7 @@ export default function HomeScreen({route, navigation }) {
 useEffect(() => {
   if(route.params?.note) {
       const newKey = notes.lenght + 1;
-      const newNote = {key: newKey.toString(),descpriction: route.params.note};
+      const newNote = {key: newKey.toString(),note: route.params.note};
       const newNotes = [...notes, newNote];
       storeData(newNotes);
   }
@@ -58,6 +58,7 @@ const getData = async() => {
               json = []
           }
           setNotes(json);
+          console.log(notes)
       })
       .catch (error => console.log(error));
   } catch (e) {
@@ -73,7 +74,7 @@ const getData = async() => {
             {
               notes.map((note) => (
                 <View tyle={Styles.rowContainer} key={note.key}>
-                  <Text style={Styles.rowText}>{note.descpriction}</Text>
+                  <Text style={Styles.rowText}>{note.note}</Text>
                 </View>
               ))
             }
