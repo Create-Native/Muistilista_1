@@ -1,5 +1,5 @@
 
-import { View, Text, SafeAreaView, Button, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, Button, ScrollView, Pressable } from 'react-native'
 import { useEffect, useState, useLayoutEffect } from 'react';
 import { Feather } from '@expo/vector-icons';
 import React from 'react'
@@ -38,6 +38,18 @@ const storeData = async (value) => {
   }
 }
 
+const handleDeletePress = async () => {
+  try {
+    await AsyncStorage.removeItem(STORAGE_KEY)
+  // console.log(key)
+    getData();
+  } catch(e) {
+    // remove error
+  }
+
+  //console.log('Done.')
+}
+
 const getData = async() => {
   try{
       return AsyncStorage.getItem('@notes_Key')
@@ -63,21 +75,31 @@ useEffect(() => {
   }
   getData();
 },[route.params?.note])
-    
+    //console.log(notes)
   return (
    
     <SafeAreaView style={Styles.container}>
       <View>
         <Text style={Styles.heading}> HomeScreen</Text>
-          <ScrollView>
-            {
-              notes.map((note) => (
-                <View tyle={Styles.rowContainer} key={note.key}>
-                  <Text style={Styles.rowText}>{note.note}</Text>
-                </View>
-              ))
-            }
-            </ScrollView>
+          <View style={{height: 400}}>
+            <ScrollView>
+              {
+                notes.map((note) => (
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between', marginEnd: 10}}>
+                    <View style={Styles.message} key={notes.key}>
+                      <Text >{note.key}: {note.note} </Text>
+                    </View>
+                    <View>
+                      <Button
+                      title='Delete'
+                     /*  onPress={() =>  handleDeletePress()} */
+                      />
+                    </View>
+                  </View>
+                  ))
+              }
+              </ScrollView>
+            </View>
         <Button style={Styles.buttonLogIn} 
             title="Edit" 
             onPress={() => navigation.navigate('Edit')}
