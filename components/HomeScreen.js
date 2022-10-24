@@ -38,23 +38,10 @@ const storeData = async (value) => {
   }
 }
 
-/* const handleDeletePress = async () => {
-  try {
-     await AsyncStorage.removeItem(STORAGE_KEY) 
-  // console.log(key)
-     getData();
-  } catch(e) {
-    // remove error
-  }
- 
-  //console.log('Done.')
-} */
-
 const handleDeletePress = (key) => {
   const filteredList = notes.filter((note) => {
     return note.key !==key;
   })
-  /* setNotes(filteredList) */
   storeData(filteredList)
   getData()
 };
