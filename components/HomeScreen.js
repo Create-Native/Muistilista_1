@@ -32,23 +32,32 @@ export default function HomeScreen({route, navigation }) {
 const storeData = async (value) => {
   try{
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem('@notes_Key', jsonValue);
+      await AsyncStorage.setItem('@notes_Key', jsonValue); 
   } catch (e) {
     //  console.log(e);
   }
 }
 
-const handleDeletePress = async () => {
+/* const handleDeletePress = async () => {
   try {
-    await AsyncStorage.removeItem(STORAGE_KEY)
+     await AsyncStorage.removeItem(STORAGE_KEY) 
   // console.log(key)
-    getData();
+     getData();
   } catch(e) {
     // remove error
   }
-
+ 
   //console.log('Done.')
-}
+} */
+
+const handleDeletePress = (key) => {
+  const filteredList = notes.filter((note) => {
+    return note.key !==key;
+  })
+  /* setNotes(filteredList) */
+  storeData(filteredList)
+  getData()
+};
 
 const getData = async() => {
   try{
@@ -75,7 +84,7 @@ useEffect(() => {
   }
   getData();
 },[route.params?.note])
-    //console.log(notes)
+
   return (
    
     <SafeAreaView style={Styles.container}>
@@ -92,7 +101,7 @@ useEffect(() => {
                     <View>
                       <Button
                       title='Delete'
-                     /*  onPress={() =>  handleDeletePress()} */
+                      onPress={() =>  handleDeletePress(note.key)}
                       />
                     </View>
                   </View>
