@@ -14,32 +14,13 @@ export default StyleSheet.create({
         marginTop: 40,
       },
       buttonLogIn: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
-        backgroundColor: 'black',
+
       },
       buttonText: {
-        fontSize: 16,
-        lineHeight: 21,
-        fontWeight: 'bold',
-        letterSpacing: 0.25,
-        color: 'white',
+
       },
       buttonSave: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
-        backgroundColor: 'black',
-        paddingTop: 30 ,
+
       },
       message: {
         padding:10,
@@ -65,5 +46,8 @@ export default StyleSheet.create({
         marginBottom:20,
         marginLeft: 20,
         marginRight: 20,
+      },
+      delButton: {
+ 
       },
 })
