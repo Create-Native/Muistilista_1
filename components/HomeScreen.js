@@ -5,6 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import React from 'react'
 import Styles from './Styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Radiobutton from './Radiobutton';
 
 
 const STORAGE_NOTES = '@notes_Notes'
@@ -14,6 +15,7 @@ export default function HomeScreen({route, navigation }) {
 
     const [notes, setNotes] = useState([]);
     const [notesKey, setNotesKey] = useState([]);
+    const [cleared, setCleared] = useState(0);
 
 /*     useLayoutEffect( () => {
     navigation.setOptions({
@@ -94,7 +96,6 @@ const storeDataKey = async (value) => {
   }
 }
 
-
 const handleDeletePress = (key) => {
   const filteredList = notes.filter((note) => {
     return note.key !==key;
@@ -102,7 +103,7 @@ const handleDeletePress = (key) => {
   storeData(filteredList)
   getData()
 };
-  console.log(notesKey, "notesKey")
+  
   return (
    
     <SafeAreaView style={Styles.container}>
@@ -114,6 +115,9 @@ const handleDeletePress = (key) => {
                 notes.map((note) => (
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', marginEnd: 10}}>
                     <View style={Styles.message} key={notes.key}>
+                      <Radiobutton 
+                        cleared={cleared}
+                        />
                       <Text >{note.key}: {note.note} </Text>
                     </View>
                     <View>
@@ -121,22 +125,32 @@ const handleDeletePress = (key) => {
                       style={Styles.delButton}
                       title='Delete'
                       onPress={() =>  handleDeletePress(note.key)}
+                      color="#841584"
                       />
                     </View>
                   </View>
                   ))
               }
               </ScrollView>
-            </View>
-        <Button style={Styles.buttonLogIn} 
-            title="Edit" 
+          </View>
+
+{/*         <Button style={Styles.buttonLogIn} 
+            title="clear" 
+            onPress={() => setCleared(2 + 1)}
+            /> */}
+
+        <Button style={Styles.buttonSave} 
+            title="Add" 
             onPress={() => navigation.navigate('Edit')}
+            color="#841584"
             />
         <Button style={Styles.buttonLogIn} 
             title="LogOut" 
             onPress={() => navigation.navigate('Login')}
+            color="#841584"
             />
-      </View>
+          </View>
+
     </SafeAreaView>
 
   );

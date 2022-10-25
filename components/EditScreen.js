@@ -38,21 +38,24 @@ export default function EditScreen({navigation}) {
                     sstyle={{flex: 0.75}}
                     onChangeText={text => setNote(text)}
                     value={note}
-                    placeholder="Add new note..."
+                    placeholder="Add new note..."       
                     />
             </View>
             <View style={{paddingTop: 50}}>
                 <Button style={Styles.buttonSave} 
                     title="Save" 
                     onPress={() => navigation.navigate('Home', {note: note})}
+                    color="#841584"
                     />
                 <Button style={Styles.buttonLogIn} 
                     title="ClearAll" 
                     onPress={() => clearAll()} 
+                    color="#841584"
                     />
                 <Button style={Styles.buttonLogIn} 
                     title="Back" 
                     onPress={() => navigation.navigate('Home')}
+                    color="#841584"
                 />          
             </View>
         </SafeAreaView>

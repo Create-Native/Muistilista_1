@@ -11,6 +11,7 @@ export default function LoginScreen({navigation}) {
         <Button style={Styles.buttonLogIn} 
           title="Submit" 
           onPress={() => navigation.navigate('Home')}
+          color="#841584"
           />
       </View>
     </SafeAreaView>
