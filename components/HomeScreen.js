@@ -7,11 +7,13 @@ import Styles from './Styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const STORAGE_KEY = '@notes_Key'
+const STORAGE_NOTES = '@notes_Notes'
+const STORAGE_NOTES_KEY = '@notes_Notes_Key'
 
 export default function HomeScreen({route, navigation }) {
 
     const [notes, setNotes] = useState([]);
+    const [notesKey, setNotesKey] = useState([]);
 
 /*     useLayoutEffect( () => {
     navigation.setOptions({
@@ -29,30 +31,22 @@ export default function HomeScreen({route, navigation }) {
         ),  
     }) 
 }, [])  */
-const storeData = async (value) => {
-  try{
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem('@notes_Key', jsonValue);
-  } catch (e) {
-    //  console.log(e);
-  }
-}
 
-const handleDeletePress = async () => {
-  try {
-    await AsyncStorage.removeItem(STORAGE_KEY)
-  // console.log(key)
-    getData();
-  } catch(e) {
-    // remove error
+useEffect(() => {
+  if(route.params?.note) {
+      const newKey = notesKey + 1;
+      const newNote = {key: newKey.toString(), note: route.params.note};
+      const newNotes = [...notes, newNote];
+      storeData(newNotes);
+      storeDataKey(newKey);
   }
-
-  //console.log('Done.')
-}
+  getData();
+  getDataKey();
+},[route.params?.note])
 
 const getData = async() => {
   try{
-      return AsyncStorage.getItem('@notes_Key')
+      return AsyncStorage.getItem('@notes_Notes')
       .then (req => JSON.parse(req))
       .then (json => {
           if (json === null) {
@@ -66,16 +60,49 @@ const getData = async() => {
   } 
 }
 
-useEffect(() => {
-  if(route.params?.note) {
-      const newKey = notes.length + 1;
-      const newNote = {key: newKey.toString(), note: route.params.note};
-      const newNotes = [...notes, newNote];
-      storeData(newNotes);
+const getDataKey = async() => {
+  try{
+      return AsyncStorage.getItem('@notes_Notes_Key')
+      .then (req => JSON.parse(req))
+      .then (json => {
+          if (json === null) {
+              json = []
+          }
+          setNotesKey(json);
+      })
+      .catch (error => console.log(error));
+  } catch (e) {
+  //   console.log(e);
+  } 
+}
+
+const storeData = async (value) => {
+  try{
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('@notes_Notes', jsonValue); 
+  } catch (e) {
+    //  console.log(e);
   }
-  getData();
-},[route.params?.note])
-    //console.log(notes)
+}
+
+const storeDataKey = async (value) => {
+  try{
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('@notes_Notes_Key', jsonValue); 
+  } catch (e) {
+    //  console.log(e);
+  }
+}
+
+
+const handleDeletePress = (key) => {
+  const filteredList = notes.filter((note) => {
+    return note.key !==key;
+  })
+  storeData(filteredList)
+  getData()
+};
+  console.log(notesKey, "notesKey")
   return (
    
     <SafeAreaView style={Styles.container}>
@@ -91,8 +118,9 @@ useEffect(() => {
                     </View>
                     <View>
                       <Button
+                      style={Styles.delButton}
                       title='Delete'
-                     /*  onPress={() =>  handleDeletePress()} */
+                      onPress={() =>  handleDeletePress(note.key)}
                       />
                     </View>
                   </View>
