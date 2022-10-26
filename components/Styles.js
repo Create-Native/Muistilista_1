@@ -9,7 +9,7 @@ export default StyleSheet.create({
         paddingTop: Platform.OS === 'android' ? Constants.StatusBarheight: 0,
       },
       heading: {
-        fontSize: 50,
+        fontSize: 40,
         marginLeft: 40,
         marginTop: 40,
       },

@@ -4,13 +4,7 @@ import {useState, React} from 'react'
 export default function Radiobutton({cleared}) {
 
     const [value, setValue] = useState(1)
-    
 
-  /*   const handleRadioButtonPress = (selectedValue) => {
-        setValue(selectedValue)
-      //  onPress(selectedValue) 
-    }
- */
   return (
     <>
     {
@@ -18,8 +12,6 @@ export default function Radiobutton({cleared}) {
                 <Pressable style={styles.circle} 
                     onPress={() => setValue(cleared)}>
                     {value === cleared && <View style={styles.checkedCircle} />}
-     {/*                {console.log("cleared", cleared)}
-                    {console.log("value", value)} */}
                 </Pressable>
             </View>
     }

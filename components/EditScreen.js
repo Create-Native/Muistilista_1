@@ -9,12 +9,9 @@ export default function EditScreen({navigation}) {
 
     const [note, setNote] = useState('');
 
-/*     useLayoutEffect(() => {
+      useLayoutEffect(() => {
       navigation.setOptions({
-        headerStyle: {
-            backgroundColor: '#f0f0f0'
-        },
-        headerRight: () => (
+           headerRight: () => (
             <Feather
                 style={Styles.navButton}
                 name="save"
@@ -24,7 +21,7 @@ export default function EditScreen({navigation}) {
                 />
             ),
       })
-      }), [note]; */
+      }), [note];
 
     const clearAll = () => {
         AsyncStorage.clear()
@@ -35,7 +32,7 @@ export default function EditScreen({navigation}) {
         <SafeAreaView style={Styles.container}>
             <View style={Styles.input}>
                 <TextInput  
-                    sstyle={{flex: 0.75}}
+                    
                     onChangeText={text => setNote(text)}
                     value={note}
                     placeholder="Add new note..."       

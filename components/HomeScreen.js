@@ -17,22 +17,19 @@ export default function HomeScreen({route, navigation }) {
     const [notesKey, setNotesKey] = useState([]);
     const [cleared, setCleared] = useState(0);
 
-/*     useLayoutEffect( () => {
+    useLayoutEffect( () => {
     navigation.setOptions({
-        headerStyle: {
-            backroundColor: '#f0f0f0'
-        },
         headerRight: () => (
             <Feather
                 style={Styles.navButton}
-                name="plus"
+                name="edit"
                 size={24}
                 color="black"
                 onPress={ () => navigation.navigate('Edit')}
             />  
         ),  
     }) 
-}, [])  */
+}, [])  
 
 useEffect(() => {
   if(route.params?.note) {
@@ -115,7 +112,7 @@ const handleDeletePress = (key) => {
                 notes.map((note) => (
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', marginEnd: 10}}>
                     <View style={Styles.message} key={notes.key}>
-                      <Radiobutton 
+                      <Radiobutton                   
                         cleared={cleared}
                         />
                       <Text >{note.key}: {note.note} </Text>
