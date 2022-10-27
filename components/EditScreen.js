@@ -26,8 +26,18 @@ export default function EditScreen({navigation}) {
     const clearAll = () => {
         AsyncStorage.clear()
         navigation.navigate('Login')
+        alert('All deleted')
     }
- 
+    
+    const handleSavePress = () => {
+        if (note === '') {
+            alert('Somethin went wrong!!')
+            console.log("tyhjä lisäys kenttä")
+        } else {
+            navigation.navigate('Home', {note: note})
+        }   
+    }
+
     return (
         <SafeAreaView style={Styles.container}>
             <View style={Styles.input}>
@@ -41,7 +51,7 @@ export default function EditScreen({navigation}) {
             <View style={{paddingTop: 50}}>
                 <Button style={Styles.buttonSave} 
                     title="Save" 
-                    onPress={() => navigation.navigate('Home', {note: note})}
+                    onPress={() => handleSavePress()}
                     color="#841584"
                     />
                 <Button style={Styles.buttonLogIn} 

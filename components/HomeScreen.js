@@ -6,6 +6,7 @@ import React from 'react'
 import Styles from './Styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Radiobutton from './Radiobutton';
+import LoginScreen from './LoginScreen';
 
 
 const STORAGE_NOTES = '@notes_Notes'
@@ -100,12 +101,13 @@ const handleDeletePress = (key) => {
   storeData(filteredList)
   getData()
 };
-  
+
   return (
-   
+    
     <SafeAreaView style={Styles.container}>
       <View>
-        <Text style={Styles.heading}> HomeScreen</Text>
+        
+        <Text style={Styles.heading}> Welcome {route.params.testKey}</Text>
           <View style={{height: 400}}>
             <ScrollView>
               {
@@ -115,7 +117,7 @@ const handleDeletePress = (key) => {
                       <Radiobutton                   
                         cleared={cleared}
                         />
-                      <Text >{note.key}: {note.note} </Text>
+                      <Text >{note.note} </Text>
                     </View>
                     <View>
                       <Button
@@ -135,6 +137,7 @@ const handleDeletePress = (key) => {
             title="clear" 
             onPress={() => setCleared(2 + 1)}
             /> */}
+          
 
         <Button style={Styles.buttonSave} 
             title="Add" 
@@ -150,5 +153,5 @@ const handleDeletePress = (key) => {
 
     </SafeAreaView>
 
-  );
+  )
 }
