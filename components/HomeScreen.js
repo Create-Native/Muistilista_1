@@ -5,6 +5,8 @@ import { Feather } from '@expo/vector-icons';
 import React from 'react'
 import Styles from './Styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Radiobutton from './Radiobutton';
+import LoginScreen from './LoginScreen';
 
 
 const STORAGE_NOTES = '@notes_Notes'
@@ -14,23 +16,21 @@ export default function HomeScreen({route, navigation }) {
 
     const [notes, setNotes] = useState([]);
     const [notesKey, setNotesKey] = useState([]);
+    const [cleared, setCleared] = useState(0);
 
-/*     useLayoutEffect( () => {
+    useLayoutEffect( () => {
     navigation.setOptions({
-        headerStyle: {
-            backroundColor: '#f0f0f0'
-        },
         headerRight: () => (
             <Feather
                 style={Styles.navButton}
-                name="plus"
+                name="edit"
                 size={24}
                 color="black"
                 onPress={ () => navigation.navigate('Edit')}
             />  
         ),  
     }) 
-}, [])  */
+}, [])  
 
 useEffect(() => {
   if(route.params?.note) {
@@ -94,7 +94,6 @@ const storeDataKey = async (value) => {
   }
 }
 
-
 const handleDeletePress = (key) => {
   const filteredList = notes.filter((note) => {
     return note.key !==key;
@@ -102,42 +101,57 @@ const handleDeletePress = (key) => {
   storeData(filteredList)
   getData()
 };
-  console.log(notesKey, "notesKey")
+
   return (
-   
+    
     <SafeAreaView style={Styles.container}>
       <View>
-        <Text style={Styles.heading}> HomeScreen</Text>
+        
+        <Text style={Styles.heading}> Welcome {route.params.testKey}</Text>
           <View style={{height: 400}}>
             <ScrollView>
               {
                 notes.map((note) => (
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', marginEnd: 10}}>
                     <View style={Styles.message} key={notes.key}>
-                      <Text >{note.key}: {note.note} </Text>
+                      <Radiobutton                   
+                        cleared={cleared}
+                        />
+                      <Text >{note.note} </Text>
                     </View>
                     <View>
                       <Button
                       style={Styles.delButton}
                       title='Delete'
                       onPress={() =>  handleDeletePress(note.key)}
+                      color="#841584"
                       />
                     </View>
                   </View>
                   ))
               }
               </ScrollView>
-            </View>
-        <Button style={Styles.buttonLogIn} 
-            title="Edit" 
+          </View>
+
+{/*         <Button style={Styles.buttonLogIn} 
+            title="clear" 
+            onPress={() => setCleared(2 + 1)}
+            /> */}
+          
+
+        <Button style={Styles.buttonSave} 
+            title="Add" 
             onPress={() => navigation.navigate('Edit')}
+            color="#841584"
             />
         <Button style={Styles.buttonLogIn} 
             title="LogOut" 
             onPress={() => navigation.navigate('Login')}
+            color="#841584"
             />
-      </View>
+          </View>
+
     </SafeAreaView>
 
-  );
+  )
 }

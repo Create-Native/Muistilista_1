@@ -12,6 +12,7 @@ export default function App() {
 
   const Stack = createNativeStackNavigator();
 
+
   return (
 
     <NavigationContainer>
@@ -19,17 +20,17 @@ export default function App() {
         <Stack.Screen 
           name="Login" 
           component={LoginScreen} 
-          options={{title: 'LoginScreen'}}
+          options={{title: 'Welcome'}}
           />
         <Stack.Screen 
           name="Home" 
           component={HomeScreen}
-          options={{title: 'HomeScreen'}} 
+          options={{title: 'Your notes'}} 
           />
         <Stack.Screen 
           name="Edit" 
           component={EditScreen}
-          options={{title: 'EditScreen'}} 
+          options={{title: 'Edit'}} 
           />
       </Stack.Navigator>
     </NavigationContainer>

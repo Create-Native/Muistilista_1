@@ -9,12 +9,9 @@ export default function EditScreen({navigation}) {
 
     const [note, setNote] = useState('');
 
-/*     useLayoutEffect(() => {
+      useLayoutEffect(() => {
       navigation.setOptions({
-        headerStyle: {
-            backgroundColor: '#f0f0f0'
-        },
-        headerRight: () => (
+           headerRight: () => (
             <Feather
                 style={Styles.navButton}
                 name="save"
@@ -24,35 +21,48 @@ export default function EditScreen({navigation}) {
                 />
             ),
       })
-      }), [note]; */
+      }), [note];
 
     const clearAll = () => {
         AsyncStorage.clear()
         navigation.navigate('Login')
+        alert('All deleted')
     }
- 
+    
+    const handleSavePress = () => {
+        if (note === '') {
+            alert('Somethin went wrong!!')
+            console.log("tyhjä lisäys kenttä")
+        } else {
+            navigation.navigate('Home', {note: note})
+        }   
+    }
+
     return (
         <SafeAreaView style={Styles.container}>
             <View style={Styles.input}>
                 <TextInput  
-                    sstyle={{flex: 0.75}}
+                    
                     onChangeText={text => setNote(text)}
                     value={note}
-                    placeholder="Add new note..."
+                    placeholder="Add new note..."       
                     />
             </View>
             <View style={{paddingTop: 50}}>
                 <Button style={Styles.buttonSave} 
                     title="Save" 
-                    onPress={() => navigation.navigate('Home', {note: note})}
+                    onPress={() => handleSavePress()}
+                    color="#841584"
                     />
                 <Button style={Styles.buttonLogIn} 
                     title="ClearAll" 
                     onPress={() => clearAll()} 
+                    color="#841584"
                     />
                 <Button style={Styles.buttonLogIn} 
                     title="Back" 
                     onPress={() => navigation.navigate('Home')}
+                    color="#841584"
                 />          
             </View>
         </SafeAreaView>
