@@ -112,8 +112,8 @@ const handleDeletePress = (key) => {
             <ScrollView>
               {
                 notes.map((note) => (
-                  <View style={{flexDirection: 'row', justifyContent: 'space-between', marginEnd: 10}}>
-                    <View style={Styles.message} key={notes.key}>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between', marginEnd: 10}} key={note.key}>
+                    <View style={Styles.message} >
                       <Radiobutton                   
                         cleared={cleared}
                         />
